@@ -51,11 +51,11 @@ namespace WebApplicationOld.Aplicacao
             }
         }
 
-        public static bool DeleteFabricante(int id)
+        public static bool DeleteFabricante(Fabricante fabricante)
         {
             using (IEFContext db = new EFContext())
             {
-                var fab = db.Fabricantes.FirstOrDefault(x => x.id.Equals(id));
+                var fab = db.Fabricantes.FirstOrDefault(x => x.id.Equals(fabricante.id));
                 if (fab == null) return false;
                 //if (fab.id == id) return db.SaveChanges() > 0;
                 db.Fabricantes.Remove(fab);

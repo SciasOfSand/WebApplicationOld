@@ -30,9 +30,7 @@ namespace WebApplicationOld.Controllers
         /// <summary>
         /// Método GET de Fabricantes
         /// </summary>
-        /// <remarks>Obtém a lista de Fabricantes</remarks>
-        /// <returns></returns>
-        /// <response code="200"></response>
+        /// <returns>HttpResponseMessage</returns>
         [HttpGet]
         public HttpResponseMessage Get()
         {
@@ -47,20 +45,15 @@ namespace WebApplicationOld.Controllers
         /// </summary>
         /// <remarks>
         /// Adiciona um novo fabricante no Banco
-        /// Exemplo de entrada:
-        /// 
-        /// POST /Todo
-        /// {
-        ///     "nome": "nome_do_fabricante"
-        /// }
         /// </remarks>
-        /// <response code="200"></response>
+        /// <param name="fabricante"></param>
+        /// <returns>HttpResponseMessage</returns>
         [HttpPost]
         public HttpResponseMessage Post(Fabricante fabricante)
         {
             if (fabricante == null)
                 return Request.CreateErrorResponse(HttpStatusCode.NoContent, "Erro: Fabricante nao pode ser null.");
-            if (fabricante.nome == null)
+            if (fabricante.nome == null || fabricante.nome == "")
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Erro: Nome nao pode ser null.");
             FabricanteService.AddFabricante(fabricante);
             return Request.CreateResponse(HttpStatusCode.OK);
@@ -73,7 +66,7 @@ namespace WebApplicationOld.Controllers
         /// Altera dados de um fabricante no Banco
         /// Exemplo de entrada:
         /// 
-        /// PUT /Todo
+        /// PUT /fabricante
         /// {
         ///     "id" : id_do_fabricante
         ///     "nome": "novo_nome_do_fabricante"
@@ -100,11 +93,11 @@ namespace WebApplicationOld.Controllers
         /// </remarks>
         /// <response code="200"></response>
         [HttpDelete]
-        public HttpResponseMessage Delete(int id)
+        public HttpResponseMessage Delete(Fabricante fabricante)
         {
             if (FabricanteService.GetFabricantes().Count() == 0)
                 return Request.CreateErrorResponse(HttpStatusCode.NoContent, "Banco Vazio.");
-            var del = FabricanteService.DeleteFabricante(id);
+            var del = FabricanteService.DeleteFabricante(fabricante);
             if (del == false)
                 return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Erro ao remover (Fabricante existe?");
             return Request.CreateResponse(HttpStatusCode.OK);

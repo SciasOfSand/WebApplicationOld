@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Newtonsoft.Json;
 
 namespace WebApplicationOld.Models
 {
@@ -15,8 +16,9 @@ namespace WebApplicationOld.Models
         public string nome { get; set; }
         public string tipo { get; set; }
 
-        //[ForeignKey("fabricante")]
+        [ForeignKey("fabricante")]
         public int id_fabricante { get; set; }
-        //public Fabricante fabricante { get; set; }
+        [JsonIgnore]
+        public Fabricante fabricante { get; set; }
     }
 }

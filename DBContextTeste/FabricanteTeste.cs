@@ -161,12 +161,12 @@ namespace DBContextTeste
         {
             var controller = new FabricanteController();
             
-            var result = controller.Delete(5) as HttpResponseMessage;
+            var result = controller.Delete(5);
             Assert.AreEqual(204, (int)result.StatusCode);
 
             PopulateDB();
 
-            var result2 = controller.Delete(6) as HttpResponseMessage;
+            var result2 = controller.Delete(6);
             Assert.AreEqual(404, (int)result2.StatusCode);
             ClearDB();
         }
