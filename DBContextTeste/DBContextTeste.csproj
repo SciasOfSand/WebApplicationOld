@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\Swashbuckle.AspNetCore.6.5.0\build\Swashbuckle.AspNetCore.props" Condition="Exists('..\packages\Swashbuckle.AspNetCore.6.5.0\build\Swashbuckle.AspNetCore.props')" />
   <Import Project="..\packages\Microsoft.Extensions.FileProviders.Embedded.2.1.0\build\netstandard2.0\Microsoft.Extensions.FileProviders.Embedded.props" Condition="Exists('..\packages\Microsoft.Extensions.FileProviders.Embedded.2.1.0\build\netstandard2.0\Microsoft.Extensions.FileProviders.Embedded.props')" />
   <Import Project="..\packages\Microsoft.Extensions.ApiDescription.Server.6.0.5\build\Microsoft.Extensions.ApiDescription.Server.props" Condition="Exists('..\packages\Microsoft.Extensions.ApiDescription.Server.6.0.5\build\Microsoft.Extensions.ApiDescription.Server.props')" />
   <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
@@ -24,6 +23,7 @@
     <TestProjectType>UnitTest</TestProjectType>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <OpenApiGenerateDocuments>false</OpenApiGenerateDocuments>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -33,7 +33,8 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Debug\DBContextTeste.xml</DocumentationFile>
+    <DocumentationFile>
+    </DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -176,15 +177,6 @@
     <Reference Include="Npgsql, Version=4.1.3.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
       <HintPath>..\packages\Npgsql.4.1.3\lib\net461\Npgsql.dll</HintPath>
     </Reference>
-    <Reference Include="Swashbuckle.AspNetCore.Swagger, Version=6.5.0.0, Culture=neutral, PublicKeyToken=62657d7474907593, processorArchitecture=MSIL">
-      <HintPath>..\packages\Swashbuckle.AspNetCore.Swagger.6.5.0\lib\netstandard2.0\Swashbuckle.AspNetCore.Swagger.dll</HintPath>
-    </Reference>
-    <Reference Include="Swashbuckle.AspNetCore.SwaggerGen, Version=6.5.0.0, Culture=neutral, PublicKeyToken=d84d99fb0135530a, processorArchitecture=MSIL">
-      <HintPath>..\packages\Swashbuckle.AspNetCore.SwaggerGen.6.5.0\lib\netstandard2.0\Swashbuckle.AspNetCore.SwaggerGen.dll</HintPath>
-    </Reference>
-    <Reference Include="Swashbuckle.AspNetCore.SwaggerUI, Version=6.5.0.0, Culture=neutral, PublicKeyToken=4232c99127b3c254, processorArchitecture=MSIL">
-      <HintPath>..\packages\Swashbuckle.AspNetCore.SwaggerUI.6.5.0\lib\netstandard2.0\Swashbuckle.AspNetCore.SwaggerUI.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.5.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
@@ -272,7 +264,6 @@
     <Error Condition="!Exists('..\packages\Microsoft.Extensions.ApiDescription.Server.6.0.5\build\Microsoft.Extensions.ApiDescription.Server.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Extensions.ApiDescription.Server.6.0.5\build\Microsoft.Extensions.ApiDescription.Server.targets'))" />
     <Error Condition="!Exists('..\packages\Microsoft.Extensions.FileProviders.Embedded.2.1.0\build\netstandard2.0\Microsoft.Extensions.FileProviders.Embedded.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Extensions.FileProviders.Embedded.2.1.0\build\netstandard2.0\Microsoft.Extensions.FileProviders.Embedded.props'))" />
     <Error Condition="!Exists('..\packages\Microsoft.Extensions.FileProviders.Embedded.2.1.0\build\netstandard2.0\Microsoft.Extensions.FileProviders.Embedded.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Extensions.FileProviders.Embedded.2.1.0\build\netstandard2.0\Microsoft.Extensions.FileProviders.Embedded.targets'))" />
-    <Error Condition="!Exists('..\packages\Swashbuckle.AspNetCore.6.5.0\build\Swashbuckle.AspNetCore.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Swashbuckle.AspNetCore.6.5.0\build\Swashbuckle.AspNetCore.props'))" />
   </Target>
   <Import Project="..\packages\MSTest.TestAdapter.2.2.10\build\net46\MSTest.TestAdapter.targets" Condition="Exists('..\packages\MSTest.TestAdapter.2.2.10\build\net46\MSTest.TestAdapter.targets')" />
   <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />

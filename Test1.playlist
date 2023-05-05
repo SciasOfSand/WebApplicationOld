@@ -1,0 +1,77 @@
+<Playlist Version="2.0">
+  <Rule Name="Includes" Match="Any">
+    <Rule Match="All">
+      <Property Name="Solution" />
+      <Rule Match="Any">
+        <Rule Match="All">
+          <Property Name="Project" Value="AutomatedTest" />
+          <Rule Match="Any">
+            <Rule Match="All">
+              <Property Name="Namespace" Value="AutomatedTest" />
+              <Rule Match="Any">
+                <Rule Match="All">
+                  <Property Name="Class" Value="EmptyDB" />
+                  <Rule Match="Any">
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="AutomatedTest.EmptyDB.Delete_NotFound" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="Delete_NotFound" />
+                      </Rule>
+                    </Rule>
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="AutomatedTest.EmptyDB.Get" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="Get" />
+                      </Rule>
+                    </Rule>
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="AutomatedTest.EmptyDB.Post_Incomplete" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="Post_Incomplete" />
+                      </Rule>
+                    </Rule>
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="AutomatedTest.EmptyDB.Post_Null" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="Post_Null" />
+                      </Rule>
+                    </Rule>
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="AutomatedTest.EmptyDB.Put_Incomplete" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="Put_Incomplete" />
+                      </Rule>
+                    </Rule>
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="AutomatedTest.EmptyDB.Put_Null" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="Put_Null" />
+                      </Rule>
+                    </Rule>
+                  </Rule>
+                </Rule>
+                <Rule Match="All">
+                  <Property Name="Class" Value="Persistence" />
+                  <Rule Match="Any">
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="AutomatedTest.Persistence.Post_FabbAdded" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="Post_FabbAdded" />
+                      </Rule>
+                    </Rule>
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="AutomatedTest.Persistence.Get_HasContent" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="Get_HasContent" />
+                      </Rule>
+                    </Rule>
+                  </Rule>
+                </Rule>
+              </Rule>
+            </Rule>
+          </Rule>
+        </Rule>
+      </Rule>
+    </Rule>
+  </Rule>
+</Playlist>

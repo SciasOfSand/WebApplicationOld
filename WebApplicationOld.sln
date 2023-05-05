@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplicationOld", "WebApp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBContextTeste", "DBContextTeste\DBContextTeste.csproj", "{5E705EE9-1993-4C1A-BDB9-14C600E5AE39}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutomatedTest", "AutomatedTest\AutomatedTest.csproj", "{B1CB13B1-4CDA-43F8-BE0D-EEBBDEC8DF0A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpecFlowTest", "SpecFlowTest\SpecFlowTest.csproj", "{7DFEAA17-548F-454F-A80A-CE6E14F3D68C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{5E705EE9-1993-4C1A-BDB9-14C600E5AE39}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5E705EE9-1993-4C1A-BDB9-14C600E5AE39}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5E705EE9-1993-4C1A-BDB9-14C600E5AE39}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1CB13B1-4CDA-43F8-BE0D-EEBBDEC8DF0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1CB13B1-4CDA-43F8-BE0D-EEBBDEC8DF0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1CB13B1-4CDA-43F8-BE0D-EEBBDEC8DF0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1CB13B1-4CDA-43F8-BE0D-EEBBDEC8DF0A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7DFEAA17-548F-454F-A80A-CE6E14F3D68C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7DFEAA17-548F-454F-A80A-CE6E14F3D68C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7DFEAA17-548F-454F-A80A-CE6E14F3D68C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7DFEAA17-548F-454F-A80A-CE6E14F3D68C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -7,7 +7,6 @@ using System.Net.Http.Headers;
 using System.Web.Http;
 using WebApplicationOld.Contexto;
 using WebApplicationOld.Models;
-using WebApplicationOld.Contexto;
 using WebApplicationOld.Aplicacao;
 
 namespace WebApplicationOld.Controllers

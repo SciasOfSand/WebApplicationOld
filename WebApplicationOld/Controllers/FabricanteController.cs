@@ -23,6 +23,7 @@ namespace WebApplicationOld.Controllers
         /// </summary>
         public FabricanteController()
         {
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
             this.Request = new HttpRequestMessage();
             this.Configuration = new HttpConfiguration();
 
