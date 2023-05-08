@@ -233,12 +233,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ProdutoTeste.cs" />
-    <Compile Include="TestDBContext.cs" />
-    <Compile Include="TestDBSet.cs" />
+    <Compile Include="Mock\TestDBContext.cs" />
+    <Compile Include="Mock\TestDBSet.cs" />
     <Compile Include="FabricanteTeste.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TestFabricanteDBSet.cs" />
-    <Compile Include="TestProdutoDBSet.cs" />
+    <Compile Include="Mock\TestFabricanteDBSet.cs" />
+    <Compile Include="Mock\TestProdutoDBSet.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
