@@ -4,6 +4,9 @@ using WebApplicationOld.Models;
 using WebApplicationOld.Contexto;
 using NUnit.Framework;
 using FluentAssertions;
+using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace DBContextTeste
 {
@@ -16,9 +19,9 @@ namespace DBContextTeste
             using (var dbContext = new EFContext())
             {
                 dbContext.Database.ExecuteSqlCommand("TRUNCATE TABLE fabricante RESTART IDENTITY CASCADE");
-                dbContext.Fabricantes.Add(new Fabricante { id = 1, nome = "Dummy1" });
-                dbContext.Fabricantes.Add(new Fabricante { id = 2, nome = "Dummy2" });
-                dbContext.Fabricantes.Add(new Fabricante { id = 3, nome = "Dummy3" });
+                dbContext.Fabricantes.Add(new Fabricante { nome = "Dummy1" });
+                dbContext.Fabricantes.Add(new Fabricante { nome = "Dummy2" });
+                dbContext.Fabricantes.Add(new Fabricante { nome = "Dummy3" });
                 dbContext.SaveChanges();
             }
         }
@@ -28,9 +31,9 @@ namespace DBContextTeste
             using (var dbContext = new EFContext())
             {
                 dbContext.Database.ExecuteSqlCommand("TRUNCATE TABLE produto RESTART IDENTITY");
-                dbContext.Produtos.Add(new Produto { id = 1, nome = "Dummy1", tipo = "DummyType", id_fabricante = 1 });
-                dbContext.Produtos.Add(new Produto { id = 2, nome = "Dummy2", tipo = "DummyType", id_fabricante = 1 });
-                dbContext.Produtos.Add(new Produto { id = 3, nome = "Dummy3", tipo = "DummyType", id_fabricante = 1 });
+                dbContext.Produtos.Add(new Produto { nome = "Dummy1", tipo = "DummyType", id_fabricante = 1 });
+                dbContext.Produtos.Add(new Produto { nome = "Dummy2", tipo = "DummyType", id_fabricante = 1 });
+                dbContext.Produtos.Add(new Produto { nome = "Dummy3", tipo = "DummyType", id_fabricante = 1 });
                 dbContext.SaveChanges();
             }
         }
@@ -63,6 +66,11 @@ namespace DBContextTeste
             //Assert.IsNotNull(result.Content);
             result.StatusCode.Should().HaveValue(200);
             result.Content.Should().NotBeNull();
+            string jsonContent = result.Content.ReadAsStringAsync().Result;
+            List<Produto> prods = JsonConvert.DeserializeObject<List<Produto>>(jsonContent);
+            prods.FirstOrDefault(x => x.id.Equals(1) && x.nome.Equals("Dummy1")).Should().NotBeNull();
+            prods.FirstOrDefault(x => x.id.Equals(2) && x.nome.Equals("Dummy2")).Should().NotBeNull();
+            prods.FirstOrDefault(x => x.id.Equals(3) && x.nome.Equals("Dummy3")).Should().NotBeNull();
             ClearDB();
         }
 
@@ -74,7 +82,6 @@ namespace DBContextTeste
             var controller = new ProdutoController();
             var dummy = new Produto()
             {
-                id = 3,
                 nome = "Dummy4",
                 tipo = "DummyType",
                 id_fabricante = 3
@@ -82,6 +89,12 @@ namespace DBContextTeste
             var result = controller.Post(dummy) as HttpResponseMessage;
             //Assert.AreEqual(200, (int)result.StatusCode);
             result.StatusCode.Should().HaveValue(200);
+            var result2 = controller.Get();
+            result2.StatusCode.Should().HaveValue(200);
+            result2.Content.Should().NotBeNull();
+            string jsonContent = result2.Content.ReadAsStringAsync().Result;
+            List<Produto> prods = JsonConvert.DeserializeObject<List<Produto>>(jsonContent);
+            prods.FirstOrDefault(x => x.nome.Equals("Dummy4")).Should().NotBeNull();
             ClearDB();
         }
 
@@ -125,6 +138,12 @@ namespace DBContextTeste
             var result = controller.Put(dummy) as HttpResponseMessage;
             //Assert.AreEqual(200, (int)result.StatusCode);
             result.StatusCode.Should().HaveValue(200);
+            var result2 = controller.Get();
+            result2.StatusCode.Should().HaveValue(200);
+            result2.Content.Should().NotBeNull();
+            string jsonContent = result2.Content.ReadAsStringAsync().Result;
+            List<Produto> prods = JsonConvert.DeserializeObject<List<Produto>>(jsonContent);
+            prods.FirstOrDefault(x => x.nome.Equals("Dummy0") && x.tipo.Equals("DummyN")).Should().NotBeNull();
             ClearDB();
         }
         [Test]
@@ -182,6 +201,12 @@ namespace DBContextTeste
             var result = controller.Delete(3) as HttpResponseMessage;
             //Assert.AreEqual(200, (int)result.StatusCode);
             result.StatusCode.Should().HaveValue(200);
+            var result2 = controller.Get();
+            result2.StatusCode.Should().HaveValue(200);
+            result2.Content.Should().NotBeNull();
+            string jsonContent = result2.Content.ReadAsStringAsync().Result;
+            List<Produto> fabs = JsonConvert.DeserializeObject<List<Produto>>(jsonContent);
+            fabs.FirstOrDefault(x => x.id.Equals(3)).Should().BeNull();
             ClearDB();
         }
 
