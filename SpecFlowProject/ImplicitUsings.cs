@@ -1,3 +1,3 @@
 ﻿global using FluentAssertions;
-global using Microsoft.VisualStudio.TestTools.UnitTesting;
+global using NUnit;
 global using TechTalk.SpecFlow;
