@@ -43,7 +43,7 @@ namespace WebApplicationOld.Controllers
         {
             if (produto == null)
                 return Request.CreateErrorResponse(HttpStatusCode.NoContent, "Erro: Produto nao pode ser null.");
-            if (produto.nome == null)
+            if (produto == null || produto.id_fabricante == 0)
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Erro: Nome nao pode ser null.");
             ProdutoService.AddProduto(produto);
             return Request.CreateResponse(HttpStatusCode.OK);
@@ -53,7 +53,7 @@ namespace WebApplicationOld.Controllers
         {
             if (produto == null)
                 return Request.CreateErrorResponse(HttpStatusCode.NoContent, "Erro: Produto nao pode ser null.");
-            if (produto.id == 0 || produto == null || produto.id_fabricante == 0)
+            if (produto.id == 0 || produto == null)
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Erro: todos os dados sao necessarios.");
             var update = ProdutoService.EditProduto(produto);
             if (update == false)
@@ -62,11 +62,11 @@ namespace WebApplicationOld.Controllers
         }
 
         [HttpDelete]
-        public HttpResponseMessage Delete(int id)
+        public HttpResponseMessage Delete(Produto produto)
         {
             if (ProdutoService.GetProdutos().Count == 0)
                 return Request.CreateErrorResponse(HttpStatusCode.NoContent, "Banco Vazio.");
-            var del = ProdutoService.DeleteProduto(id);
+            var del = ProdutoService.DeleteProduto(produto);
             if (del == false)
                 return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Erro ao salvar (Produto existe?).");
             return Request.CreateResponse(HttpStatusCode.OK);

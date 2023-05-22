@@ -45,17 +45,18 @@ namespace WebApplicationOld.Aplicacao
                 if (prod == null) return false;
                 prod.nome = produto.nome;
                 prod.tipo = produto.tipo;
+                if (produto.id_fabricante != 0)
                 prod.id_fabricante = produto.id_fabricante;
                 db.MarkAsModified(prod);
                 return db.SaveChanges() > 0;
             }
         }
 
-        public static bool DeleteProduto(int id)
+        public static bool DeleteProduto(Produto produto)
         {
             using (IEFContext db = new EFContext())
             {
-                var prod = db.Produtos.FirstOrDefault(x => x.id.Equals(id));
+                var prod = db.Produtos.FirstOrDefault(x => x.id.Equals(produto.id));
                 if (prod == null) return false;
                 db.Produtos.Remove(prod);
                 return db.SaveChanges() > 0;

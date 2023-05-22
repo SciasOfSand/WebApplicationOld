@@ -41,6 +41,7 @@ namespace DBContextTeste
         private void ClearDB()
         {
             var db = new EFContext();
+            db.Database.ExecuteSqlCommand("TRUNCATE TABLE fabricante RESTART IDENTITY CASCADE");
             db.Database.ExecuteSqlCommand("TRUNCATE TABLE produto RESTART IDENTITY");
             db.SaveChanges();
         }
@@ -215,13 +216,13 @@ namespace DBContextTeste
         {
             var controller = new ProdutoController();
 
-            var result = controller.Delete(5) as HttpResponseMessage;
+            var result = controller.Delete(new Produto() { id = 5 });
             //Assert.AreEqual(204, (int)result.StatusCode);
             result.StatusCode.Should().HaveValue(204);
 
             PopulateDB();
 
-            var result2 = controller.Delete(6) as HttpResponseMessage;
+            var result2 = controller.Delete(new Produto() { id = 6 });
             //Assert.AreEqual(404, (int)result2.StatusCode);
             result2.StatusCode.Should().HaveValue(404);
             ClearDB();

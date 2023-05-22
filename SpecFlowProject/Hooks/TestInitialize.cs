@@ -1,43 +1,37 @@
 ﻿using TechTalk.SpecFlow;
 using WebApplicationOld.Contexto;
+using WebApplicationOld.Models;
 
 namespace SpecFlowProject.Hooks
 {
     [Binding]
     public sealed class TestInitialize
     {
-        // For additional details on SpecFlow hooks see http://go.specflow.org/doc-hooks
-
-        [BeforeScenario("@tag1")]
-        public void BeforeScenarioWithTag()
+        [BeforeFeature("prod")]
+        public static void BeforeFeatureProdHook()
         {
-            // Example of filtering hooks using tags. (in this case, this 'before scenario' hook will execute if the feature/scenario contains the tag '@tag1')
-            // See https://docs.specflow.org/projects/specflow/en/latest/Bindings/Hooks.html?highlight=hooks#tag-scoping
-
-            //TODO: implement logic that has to run before executing each scenario
+            Console.WriteLine("BeforeFeature @prod");
+            using (var dbContext = new EFContext())
+            {
+                dbContext.Database.ExecuteSqlCommand("TRUNCATE TABLE fabricante RESTART IDENTITY CASCADE");
+                dbContext.Fabricantes.Add(new Fabricante { nome = "Dummy1" });
+                dbContext.Fabricantes.Add(new Fabricante { nome = "Dummy2" });
+                dbContext.Fabricantes.Add(new Fabricante { nome = "Dummy3" });
+                dbContext.SaveChanges();
+            }
+        }
+        [AfterFeature("prod")]
+        public static void AfterFeatureProdHook()
+        {
+            Console.WriteLine("BeforeFeature @prod");
+            using (var dbContext = new EFContext())
+            {
+                var db = new EFContext();
+                db.Database.ExecuteSqlCommand("TRUNCATE TABLE fabricante RESTART IDENTITY CASCADE");
+                db.Database.ExecuteSqlCommand("TRUNCATE TABLE produto RESTART IDENTITY");
+                db.SaveChanges();
+            }
         }
 
-        [BeforeScenario(Order = 1)]
-        public void FirstBeforeScenario()
-        {
-            // Example of ordering the execution of hooks
-            // See https://docs.specflow.org/projects/specflow/en/latest/Bindings/Hooks.html?highlight=order#hook-execution-order
-
-            //TODO: implement logic that has to run before executing each scenario
-        }
-
-        [BeforeFeature("Fabricante")]
-        public static void FabricanteHook()
-        {
-            //TODO: implement logic that has to run before executing each scenario
-        }
-
-        [AfterScenario]
-        public void AfterScenario()
-        {
-            var db = new EFContext();
-            db.Database.ExecuteSqlCommand("TRUNCATE TABLE fabricante RESTART IDENTITY CASCADE");
-            db.SaveChanges();
-        }
     }
 }

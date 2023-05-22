@@ -33,30 +33,31 @@ namespace SpecFlowProject.StepDefinitions
         {
             var db = new EFContext();
             db.Database.ExecuteSqlCommand("TRUNCATE TABLE fabricante RESTART IDENTITY CASCADE");
+            db.Database.ExecuteSqlCommand("TRUNCATE TABLE produto RESTART IDENTITY");
             db.SaveChanges();
         }
 
-        [Given(@"an empty database")]
-        public void GivenAnEmptyDatabase()
+        [Given(@"an empty Fabricante table")]
+        public void GivenAnEmptyFabricanteTable()
         {
             ClearDB();
         }
 
-        [When(@"I make a GET request")]
+        [When(@"I make a Fabricante GET request")]
         public void WhenIMakeAGETRequest()
         {
             controller = new FabricanteController();
             result = controller.Get();
         }
 
-        [Then(@"I receive a (.*) status code")]
+        [Then(@"I receive a (.*) status code from Fabricante request")]
         public void ThenIReceiveAStatusCode(int p0)
         {
             result.StatusCode.Should().HaveValue(p0);
         }
 
-        [Given(@"a populated database")]
-        public void GivenAPopulatedDatabase()
+        [Given(@"a table populated by Fabricantes")]
+        public void GivenATablePopulatedByFabs()
         {
             PopulateDB();
         }
@@ -68,9 +69,9 @@ namespace SpecFlowProject.StepDefinitions
             fabs = JsonConvert.DeserializeObject<List<Fabricante>>(jsonContent);
             result.StatusCode.Should().HaveValue(p0);
             //Console.WriteLine($"The numbers are {fabs.FirstOrDefault(x => x.id.Equals(2)).nome}");
-            fabs.FirstOrDefault(x => x.nome.Equals(table.Rows[0]["nome"])).Should().NotBeNull();
-            fabs.FirstOrDefault(x => x.nome.Equals(table.Rows[1]["nome"])).Should().NotBeNull();
-            fabs.FirstOrDefault(x => x.nome.Equals(table.Rows[2]["nome"])).Should().NotBeNull();
+            fabs.FirstOrDefault(x => x.id.Equals(int.Parse(table.Rows[0]["id"])) && x.nome.Equals(table.Rows[0]["nome"])).Should().NotBeNull();
+            fabs.FirstOrDefault(x => x.id.Equals(int.Parse(table.Rows[1]["id"])) && x.nome.Equals(table.Rows[1]["nome"])).Should().NotBeNull();
+            fabs.FirstOrDefault(x => x.id.Equals(int.Parse(table.Rows[2]["id"])) && x.nome.Equals(table.Rows[2]["nome"])).Should().NotBeNull();
         }
 
         [When(@"I make a POST request for a Fabricante named ""([^""]*)"":")]
@@ -81,14 +82,14 @@ namespace SpecFlowProject.StepDefinitions
             result = controller.Post(dummy);
         }
 
-        [When(@"I GET the data back form the DB")]
+        [When(@"I GET the Fabricante data back form the DB")]
         public void WhenIGETTheDataBackFormTheDB()
         {
             controller = new FabricanteController();
             result = controller.Get();
         }
 
-        [Then(@"there contains an element named ""([^""]*)""")]
+        [Then(@"there contains a Fabricante named ""([^""]*)""")]
         public void ThenThereContainsAnElementNamed(string p0)
         {
             jsonContent = result.Content.ReadAsStringAsync().Result;
@@ -96,14 +97,14 @@ namespace SpecFlowProject.StepDefinitions
             fabs.FirstOrDefault(x => x.nome.Equals(p0)).Should().NotBeNull();
         }
 
-        [When(@"I make a POST request using a null JSON")]
+        [When(@"I make a Fabricante POST request using a null JSON")]
         public void WhenIMakeAPOSTRequestUsingANullJSON()
         {
             controller = new FabricanteController();
             result = controller.Post(null);
         }
 
-        [When(@"I make a POST request using the following JSON:")]
+        [When(@"I make a Fabricante POST request using the following JSON:")]
         public void WhenIMakeAPOSTRequestUsingTheFollowingJSON(Table table)
         {
             dynamic data = table.CreateDynamicInstance();
@@ -118,13 +119,13 @@ namespace SpecFlowProject.StepDefinitions
             dummy = new Fabricante() { id = p0, nome = p1 };
             result = controller.Put(dummy);
         }
-        [When(@"I make a PUT request using a null JSON")]
+        [When(@"I make a Fabricante PUT request using a null JSON")]
         public void WhenIMakeAPUTRequestUsingANullJSON()
         {
             controller = new FabricanteController();
             result = controller.Put(null);
         }
-        [When(@"I make a PUT request using the following JSON:")]
+        [When(@"I make a Fabricante PUT request using the following JSON:")]
         public void WhenIMakeAPUTRequestUsingTheFollowingJSON(Table table)
         {
             dynamic data = table.CreateDynamicInstance();
@@ -132,7 +133,7 @@ namespace SpecFlowProject.StepDefinitions
             controller = new FabricanteController();
             result = controller.Put(fab);
         }
-        [Then(@"the element of id (.*) is now named ""([^""]*)""")]
+        [Then(@"the Fabricante of id (.*) is now named ""([^""]*)""")]
         public void ThenTheElementOfIdIsNowNamed(int p0, string p1)
         {
             jsonContent = result.Content.ReadAsStringAsync().Result;
@@ -146,7 +147,7 @@ namespace SpecFlowProject.StepDefinitions
             controller = new FabricanteController();
             result = controller.Delete(dummy);
         }
-        [Then(@"the element of name ""([^""]*)"" is not found")]
+        [Then(@"the Fabricante of name ""([^""]*)"" is not found")]
         public void ThenTheElementOfNameIsNotFound(string p0)
         {
             jsonContent = result.Content.ReadAsStringAsync().Result;

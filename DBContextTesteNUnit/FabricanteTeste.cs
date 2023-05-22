@@ -36,6 +36,7 @@ namespace DBContextTeste
         {
             var db = new EFContext();
             db.Database.ExecuteSqlCommand("TRUNCATE TABLE fabricante RESTART IDENTITY CASCADE");
+            db.Database.ExecuteSqlCommand("TRUNCATE TABLE produto RESTART IDENTITY");
             db.SaveChanges();
         }
 
